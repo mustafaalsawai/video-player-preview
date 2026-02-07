@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشغل الفيديو</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="player" id="player">
+        <!-- Video Layer -->
+        <div class="video-layer">
+            <video id="video" preload="auto" autoplay muted playsinline
+                src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
+        </div>
+
+        <!-- Gradients -->
+        <div class="grad-top"></div>
+        <div class="grad-bottom"></div>
+
+        <!-- Loader -->
+        <div class="loader" id="loader">
+            <div class="loader-ring"></div>
+        </div>
+
+        <!-- Center Play -->
+        <div class="center-play">
+            <div class="center-play-icon show" id="centerPlay">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5.14v14l11-7-11-7z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Side Hints -->
+        <div class="side-hint left" id="hintLeft">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M11.276 0.182C11.513-0.061 11.899-0.06 12.136 0.183C12.373 0.426 12.372 0.82 12.135 1.062L11.618 1.591C16.301 1.916 20 5.907 20 10.784C20 15.873 15.97 20 11 20C6.03 20 2 15.873 2 10.784C2 7.447 3.732 4.528 6.321 2.911C6.647 2.707 7.073 2.812 7.273 3.146C7.472 3.48 7.368 3.917 7.042 4.121C4.847 5.491 3.385 7.962 3.385 10.784C3.385 15.09 6.795 18.582 11 18.582C15.205 18.582 18.615 15.09 18.615 10.784C18.615 6.696 15.544 3.344 11.635 3.014L12.135 3.526C12.372 3.769 12.373 4.163 12.136 4.406C11.899 4.649 11.513 4.65 11.276 4.407L9.648 2.741C9.529 2.619 9.47 2.46 9.469 2.301V2.287C9.47 2.128 9.529 1.969 9.648 1.848L11.276 0.182Z" fill="white" />
+                <path d="M14.528 8.717H11.824L11.664 10.931H11.718L12.162 10.229C12.438 10.129 12.74 10.074 13.061 10.074C14.253 10.083 15.054 10.767 15.054 12.033C15.054 13.345 14.173 14.201 12.705 14.201C11.753 14.201 11.006 13.828 10.534 13.136L11.148 12.407C11.53 12.917 12.02 13.254 12.67 13.254C13.488 13.254 13.843 12.762 13.843 12.07C13.843 11.386 13.487 11.031 12.829 11.031C12.367 11.031 11.842 11.204 11.433 11.45L10.64 11.213L10.89 7.714H14.528V8.717Z" fill="white" />
+                <path d="M9.285 14.092H8.128V9.018H8.093C7.844 9.4 7.407 9.692 6.847 9.692V8.689C7.416 8.689 7.977 8.206 8.208 7.714H9.285V14.092Z" fill="white" />
+            </svg>
+        </div>
+        <div class="side-hint right" id="hintRight">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M9.869 0.182C10.106-0.061 10.491-0.061 10.729 0.182L12.356 1.848C12.474 1.97 12.533 2.129 12.533 2.289C12.537 2.452 12.477 2.617 12.356 2.742L10.729 4.408C10.491 4.65 10.106 4.65 9.869 4.407C9.632 4.164 9.632 3.77 9.869 3.527L10.369 3.014C6.458 3.343 3.385 6.696 3.385 10.784C3.385 15.09 6.795 18.582 11 18.582C15.205 18.582 18.615 15.09 18.615 10.784C18.615 7.963 17.152 5.491 14.958 4.121C14.632 3.917 14.529 3.48 14.728 3.146C14.927 2.812 15.353 2.707 15.679 2.911C18.268 4.528 20 7.448 20 10.784C20 15.873 15.97 20 11 20C6.031 20 2 15.873 2 10.784C2 5.907 5.701 1.915 10.384 1.591L9.869 1.063C9.632 0.82 9.631 0.425 9.869 0.182Z" fill="white" />
+                <path d="M14.528 8.717H11.824L11.664 10.931H11.718L12.162 10.23C12.438 10.13 12.74 10.075 13.061 10.075C14.253 10.084 15.054 10.767 15.054 12.034C15.054 13.345 14.173 14.202 12.705 14.202C11.753 14.202 11.006 13.828 10.534 13.136L11.148 12.407C11.53 12.917 12.02 13.254 12.67 13.254C13.488 13.254 13.843 12.762 13.843 12.07C13.843 11.387 13.487 11.031 12.829 11.031C12.367 11.031 11.842 11.204 11.433 11.45L10.64 11.213L10.89 7.715H14.528V8.717Z" fill="white" />
+                <path d="M9.285 14.092H8.128V9.018H8.093C7.844 9.401 7.408 9.692 6.847 9.692V8.69C7.416 8.69 7.977 8.207 8.208 7.715H9.285V14.092Z" fill="white" />
+            </svg>
+        </div>
+
+        <!-- TOP BAR -->
+        <div class="top-bar" id="topBar">
+            <button class="close-btn" id="closeBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <div class="title-area">
+                <a class="title-link" id="titleLink" href="#" onclick="return false;">إعادة إكتشاف الصلاة | بودكاست فنجان</a>
+                <button class="title-pip-btn" id="pipBtn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.993 2.709C16.705 2.709 17.291 3.283 17.291 4.001V9.875H18.3C18.826 9.875 19.291 10.289 19.291 10.846V17.488C19.291 18.05 18.822 18.459 18.3 18.459H9.199C8.673 18.459 8.208 18.045 8.207 17.488V15.626H2.339C1.627 15.626 1.041 15.052 1.041 14.333V4.001C1.041 3.283 1.627 2.709 2.339 2.709H15.993ZM2.339 3.959C2.307 3.959 2.291 3.983 2.291 4.001V14.333C2.291 14.352 2.307 14.376 2.339 14.376H8.207V10.846C8.208 10.285 8.677 9.875 9.199 9.875H16.041V4.001C16.041 3.983 16.025 3.959 15.993 3.959H2.339Z" fill="white" />
+                        <path d="M4.955 9.391C4.64 9.359 4.394 9.093 4.394 8.77C4.394 8.446 4.64 8.18 4.955 8.148L5.019 8.145H5.596L4.142 6.691C3.898 6.447 3.898 6.051 4.142 5.807C4.386 5.563 4.781 5.563 5.025 5.807L6.48 7.262V6.685C6.481 6.34 6.76 6.06 7.105 6.06C7.45 6.06 7.73 6.34 7.73 6.685V8.763C7.73 8.797 7.728 8.831 7.722 8.864C7.703 8.991 7.645 9.114 7.547 9.211C7.448 9.31 7.324 9.368 7.196 9.386C7.169 9.391 7.143 9.393 7.115 9.394H5.019L4.955 9.391Z" fill="white" />
+                    </svg>
+                    <span class="tip">صورة في صورة</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- BOTTOM CONTROLS -->
+        <div class="bottom-controls" id="bottomControls">
+            <div class="progress-wrap" id="progressWrap">
+                <div class="progress-tooltip" id="progressTip">00:00</div>
+                <div class="progress-track" id="progressTrack">
+                    <div class="progress-buffer" id="progressBuffer"></div>
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-thumb" id="progressThumb"></div>
+                </div>
+            </div>
+            <div class="controls-row">
+                <div class="controls-left">
+                    <!-- Play/Pause -->
+                    <button class="btn" id="playPauseBtn">
+                        <svg class="icon-pause" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                            <path d="M9.999 3.611C10.46 3.611 10.833 3.984 10.833 4.445V22.222C10.833 22.683 10.46 23.056 9.999 23.056C9.539 23.056 9.166 22.683 9.166 22.222V4.445C9.166 3.984 9.539 3.611 9.999 3.611Z" fill="white" />
+                            <path d="M16.666 3.611C17.126 3.611 17.499 3.984 17.499 4.445V22.222C17.499 22.683 17.126 23.056 16.666 23.056C16.206 23.056 15.833 22.683 15.833 22.222V4.445C15.833 3.984 16.206 3.611 16.666 3.611Z" fill="white" />
+                        </svg>
+                        <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M8.3139 4.36883L18.1853 10.5156C18.4578 10.6857 18.6821 10.9229 18.8367 11.2046C18.9914 11.4862 19.0711 11.8028 19.0684 12.1241C19.0656 12.4453 18.9805 12.7605 18.8211 13.0395C18.6617 13.3184 18.4334 13.5518 18.158 13.7173L8.28796 19.6469C8.00297 19.8181 7.67764 19.9105 7.34523 19.9148C7.01281 19.919 6.68523 19.8349 6.39597 19.671C6.10672 19.5072 5.86616 19.2694 5.6989 18.9821C5.53163 18.6948 5.44366 18.3683 5.44397 18.0358V5.96081C5.44424 5.62606 5.534 5.29747 5.70397 5.00908C5.87394 4.7207 6.11792 4.483 6.41065 4.32062C6.70338 4.15824 7.0342 4.07709 7.36884 4.08556C7.70348 4.09404 8.02977 4.19184 8.3139 4.36883Z" fill="#F7F8F8"/>
+                        </svg>
+                        <span class="tip">تشغيل / إيقاف</span>
+                    </button>
+
+                    <!-- Rewind -->
+                    <button class="btn seek-btn" id="rewardBtn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M11.276 0.182C11.513-0.061 11.899-0.06 12.136 0.183C12.373 0.426 12.372 0.82 12.135 1.062L11.618 1.591C16.301 1.916 20 5.907 20 10.784C20 15.873 15.97 20 11 20C6.03 20 2 15.873 2 10.784C2 7.447 3.732 4.528 6.321 2.911C6.647 2.707 7.073 2.812 7.273 3.146C7.472 3.48 7.368 3.917 7.042 4.121C4.847 5.491 3.385 7.962 3.385 10.784C3.385 15.09 6.795 18.582 11 18.582C15.205 18.582 18.615 15.09 18.615 10.784C18.615 6.696 15.544 3.344 11.635 3.014L12.135 3.526C12.372 3.769 12.373 4.163 12.136 4.406C11.899 4.649 11.513 4.65 11.276 4.407L9.648 2.741C9.529 2.619 9.47 2.46 9.469 2.301V2.287C9.47 2.128 9.529 1.969 9.648 1.848L11.276 0.182Z" fill="white" />
+                            <path d="M14.528 8.717H11.824L11.664 10.931H11.718L12.162 10.229C12.438 10.129 12.74 10.074 13.061 10.074C14.253 10.083 15.054 10.767 15.054 12.033C15.054 13.345 14.173 14.201 12.705 14.201C11.753 14.201 11.006 13.828 10.534 13.136L11.148 12.407C11.53 12.917 12.02 13.254 12.67 13.254C13.488 13.254 13.843 12.762 13.843 12.07C13.843 11.386 13.487 11.031 12.829 11.031C12.367 11.031 11.842 11.204 11.433 11.45L10.64 11.213L10.89 7.714H14.528V8.717Z" fill="white" />
+                            <path d="M9.285 14.092H8.128V9.018H8.093C7.844 9.4 7.407 9.692 6.847 9.692V8.689C7.416 8.689 7.977 8.206 8.208 7.714H9.285V14.092Z" fill="white" />
+                        </svg>
+                        <span class="tip">ترجيع ١٥ ثانية</span>
+                    </button>
+
+                    <!-- Forward -->
+                    <button class="btn seek-btn" id="forwardBtn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9.869 0.182C10.106-0.061 10.491-0.061 10.729 0.182L12.356 1.848C12.474 1.97 12.533 2.129 12.533 2.289C12.537 2.452 12.477 2.617 12.356 2.742L10.729 4.408C10.491 4.65 10.106 4.65 9.869 4.407C9.632 4.164 9.632 3.77 9.869 3.527L10.369 3.014C6.458 3.343 3.385 6.696 3.385 10.784C3.385 15.09 6.795 18.582 11 18.582C15.205 18.582 18.615 15.09 18.615 10.784C18.615 7.963 17.152 5.491 14.958 4.121C14.632 3.917 14.529 3.48 14.728 3.146C14.927 2.812 15.353 2.707 15.679 2.911C18.268 4.528 20 7.448 20 10.784C20 15.873 15.97 20 11 20C6.031 20 2 15.873 2 10.784C2 5.907 5.701 1.915 10.384 1.591L9.869 1.063C9.632 0.82 9.631 0.425 9.869 0.182Z" fill="white" />
+                            <path d="M14.528 8.717H11.824L11.664 10.931H11.718L12.162 10.23C12.438 10.13 12.74 10.075 13.061 10.075C14.253 10.084 15.054 10.767 15.054 12.034C15.054 13.345 14.173 14.202 12.705 14.202C11.753 14.202 11.006 13.828 10.534 13.136L11.148 12.407C11.53 12.917 12.02 13.254 12.67 13.254C13.488 13.254 13.843 12.762 13.843 12.07C13.843 11.387 13.487 11.031 12.829 11.031C12.367 11.031 11.842 11.204 11.433 11.45L10.64 11.213L10.89 7.715H14.528V8.717Z" fill="white" />
+                            <path d="M9.285 14.092H8.128V9.018H8.093C7.844 9.401 7.408 9.692 6.847 9.692V8.69C7.416 8.69 7.977 8.207 8.208 7.715H9.285V14.092Z" fill="white" />
+                        </svg>
+                        <span class="tip">تقديم ١٥ ثانية</span>
+                    </button>
+
+                    <!-- Volume with Audio Popover -->
+                    <div class="popover-anchor" id="audioAnchor">
+                        <div class="volume-group" id="volumeGroup">
+                            <button class="btn" id="volumeBtn">
+                                <svg class="icon-vol-on" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.039 3.393C14.353 2.422 16.21 3.361 16.211 4.992V22.594C16.211 24.225 14.353 25.164 13.039 24.193L3.807 17.375C1.398 15.595 1.398 11.991 3.807 10.211L13.039 3.393ZM14.141 4.767L14.079 4.8L4.847 11.619C3.385 12.7 3.385 14.886 4.847 15.967L14.079 22.786C14.236 22.902 14.461 22.79 14.461 22.594V4.992C14.46 4.82 14.289 4.713 14.141 4.767Z" fill="white" />
+                                    <path d="M20.322 5.337C20.663 4.996 21.217 4.996 21.559 5.337C26.23 10.008 26.23 17.584 21.559 22.255C21.217 22.596 20.663 22.596 20.322 22.255C19.98 21.913 19.98 21.359 20.322 21.017C24.309 17.03 24.309 10.562 20.322 6.574C19.98 6.233 19.98 5.679 20.322 5.337Z" fill="white" />
+                                    <path d="M18.714 9.279C19.056 8.938 19.61 8.938 19.951 9.279C22.445 11.773 22.445 15.818 19.951 18.313C19.61 18.654 19.056 18.654 18.714 18.313C18.373 17.971 18.372 17.417 18.714 17.075C20.525 15.265 20.525 12.327 18.714 10.516C18.372 10.175 18.372 9.621 18.714 9.279Z" fill="white" />
+                                </svg>
+                                <svg class="icon-vol-off" width="28" height="28" viewBox="0 0 28 28" fill="none" style="display:none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.039 3.393C14.353 2.422 16.21 3.361 16.211 4.992V22.594C16.211 24.225 14.353 25.164 13.039 24.193L3.807 17.375C1.398 15.595 1.398 11.991 3.807 10.211L13.039 3.393ZM14.141 4.767L14.079 4.8L4.847 11.619C3.385 12.7 3.385 14.886 4.847 15.967L14.079 22.786C14.236 22.902 14.461 22.79 14.461 22.594V4.992C14.46 4.82 14.289 4.713 14.141 4.767Z" fill="white" />
+                                    <line x1="19" y1="10" x2="24" y2="18" stroke="white" stroke-width="1.75" stroke-linecap="round" />
+                                    <line x1="24" y1="10" x2="19" y2="18" stroke="white" stroke-width="1.75" stroke-linecap="round" />
+                                </svg>
+                                <span class="tip">الصوت</span>
+                            </button>
+                            <div class="vol-slider-wrap">
+                                <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.8">
+                            </div>
+                        </div>
+                        <!-- Audio Popover -->
+                      
+                    </div>
+
+                    <!-- Time -->
+                    <div class="time-display">
+                        <span class="current" id="timeCurrent">00:00</span>
+                        <span class="sep">/</span>
+                        <span id="timeTotal">00:00</span>
+                    </div>
+                </div>
+
+                <div class="controls-right">
+                    <!-- Subtitles -->
+                    <button class="btn" id="subtitleBtn">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M19.492 8.937C20.793 8.937 21.952 9.606 22.748 10.711L21.863 11.651C21.302 11.144 20.431 10.584 19.437 10.584C18.28 10.584 17.355 11.344 17.355 12.232C17.355 13.12 18.314 14.097 20.034 14.097C20.486 14.097 20.992 14.024 21.537 13.879L23.347 13.409L23.349 13.405L23.692 14.981L22.389 15.324C18.915 16.228 16.869 18.201 16.869 20.192C16.869 21.804 18.227 22.816 20.669 22.816C21.792 22.816 23.257 22.635 24.597 22.219L24.958 23.668C23.927 24.066 22.226 24.5 20.597 24.5C17.882 24.5 15.584 23.286 15.584 20.282C15.584 17.64 17.339 16.029 18.605 15.287C17.102 14.908 16.071 13.784 16.071 12.211C16.072 10.311 17.611 8.937 19.492 8.937Z" fill="white" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.992 16.168H13.237L12.095 12.911H6.377L5.22 16.168H3.5L8.061 3.5H10.413L14.992 16.168ZM6.829 11.481H11.626L9.273 4.766H9.2L6.829 11.481Z" fill="white" />
+                        </svg>
+                        <div class="sub-dot"></div>
+                        <span class="tip">الترجمة</span>
+                    </button>
+
+                    <!-- Quality with Popover -->
+                    <div class="popover-anchor" id="qualityAnchor">
+                        <button class="btn" id="qualityBtn">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <path d="M18.263 22.976C18.685 22.976 19.028 23.319 19.028 23.741C19.028 24.162 18.685 24.504 18.263 24.504H9.739C9.318 24.504 8.975 24.162 8.974 23.741C8.974 23.319 9.317 22.976 9.739 22.976H18.263Z" fill="white" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.099 8.732C11.39 8.564 11.75 8.562 12.043 8.728L18.254 12.27C18.549 12.438 18.73 12.752 18.731 13.09C18.731 13.429 18.547 13.744 18.254 13.912L12.043 17.454C11.899 17.537 11.737 17.578 11.576 17.578C11.41 17.576 11.246 17.534 11.099 17.449C10.809 17.281 10.63 16.966 10.63 16.632V9.549C10.63 9.213 10.811 8.9 11.099 8.732ZM11.938 16.003L17.048 13.09L11.938 10.178V16.003Z" fill="white" />
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.863 4.666C23.766 4.666 24.5 5.4 24.5 6.303V19.877C24.5 20.781 23.767 21.515 22.863 21.516H5.137C4.233 21.515 3.5 20.781 3.5 19.877V6.303C3.5 5.4 4.234 4.666 5.137 4.666H22.863ZM5.137 6.195C5.076 6.195 5.029 6.242 5.029 6.303V19.877C5.029 19.938 5.076 19.986 5.137 19.987H22.863C22.924 19.986 22.971 19.938 22.971 19.877V6.303C22.971 6.243 22.924 6.195 22.863 6.195H5.137Z" fill="white" />
+                            </svg>
+                            <span class="tip">الجودة</span>
+                        </button>
+                        <!-- Quality Popover -->
+                        <div class="popover-panel" id="qualityPopover">
+                            <div class="popover-header">جودة</div>
+                            <div class="popover-body">
+                                <div class="popover-item active" data-quality="auto" onclick="selectQuality(this)">
+                                    <svg class="popover-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span class="popover-item-name">تلقائي</span>
+                                </div>
+                                <div class="popover-item" data-quality="low" onclick="selectQuality(this)">
+                                    <svg class="popover-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span class="popover-item-name">منخفض</span>
+                                </div>
+                                <div class="popover-item" data-quality="medium" onclick="selectQuality(this)">
+                                    <svg class="popover-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span class="popover-item-name">متوسط</span>
+                                </div>
+                                <div class="popover-item" data-quality="high" onclick="selectQuality(this)">
+                                    <svg class="popover-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span class="popover-item-premium"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" fill="#00c853"/></svg></span>
+                                    <span class="popover-item-name">مرتفع</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More -->
+                    <button class="btn" id="moreBtn">
+                        <svg width="27" height="27" viewBox="0 0 27 27" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22.436 9.558C23.269 9.558 24.166 10.163 24.167 11.163V22.562C24.166 23.562 23.269 24.167 22.436 24.167H4.231C3.397 24.167 2.5 23.562 2.5 22.562V11.163C2.5 10.163 3.397 9.558 4.231 9.558H22.436ZM4.231 11.225C4.192 11.225 4.167 11.261 4.167 11.3V22.424C4.167 22.463 4.192 22.5 4.231 22.5H22.436C22.475 22.5 22.5 22.463 22.5 22.424V11.3C22.5 11.261 22.475 11.225 22.436 11.225H4.231Z" fill="white" />
+                            <path d="M20.1 6.03C20.56 6.03 20.933 6.403 20.933 6.863C20.933 7.323 20.56 7.696 20.1 7.696H5.687C5.227 7.696 4.854 7.323 4.854 6.863C4.854 6.403 5.227 6.03 5.687 6.03H20.1Z" fill="white" />
+                            <path d="M17.451 2.5C17.911 2.5 18.285 2.873 18.285 3.333C18.285 3.794 17.911 4.167 17.451 4.167H8.039C7.579 4.167 7.206 3.794 7.206 3.333C7.206 2.873 7.579 2.5 8.039 2.5H17.451Z" fill="white" />
+                        </svg>
+                        <span class="tip">المزيد</span>
+                    </button>
+
+                    <!-- Fullscreen -->
+                    <button class="btn btn-fs" id="fsBtn">
+                        <svg class="icon-fs-enter" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                            <path d="M10.637 2.5H4.845C3.543 2.5 2.486 3.556 2.486 4.858V10.65" stroke="white" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M15.365 2.5H21.157C22.459 2.5 23.516 3.556 23.516 4.858V10.65" stroke="white" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M10.637 23.499H4.845C3.543 23.499 2.486 22.443 2.486 21.141V15.35" stroke="white" stroke-width="2" stroke-linejoin="round" />
+                            <path d="M15.365 23.499H21.157C22.459 23.499 23.516 22.443 23.516 21.141V15.35" stroke="white" stroke-width="2" stroke-linejoin="round" />
+                        </svg>
+                        <svg class="icon-fs-exit" width="26" height="26" viewBox="0 0 26 26" fill="none" style="display:none">
+                            <path d="M4 10.5H7.5C8.33 10.5 9 9.83 9 9V5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M22 10.5H18.5C17.67 10.5 17 9.83 17 9V5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4 15.5H7.5C8.33 15.5 9 16.17 9 17V20.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M22 15.5H18.5C17.67 15.5 17 16.17 17 17V20.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="tip">ملء الشاشة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
