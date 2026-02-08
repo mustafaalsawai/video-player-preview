@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
-
+@import url('fonts/stylesheet.css');
 
 :root {
     --white: #ffffff;
@@ -12,7 +11,7 @@
     --white-8: rgba(255, 255, 255, 0.08);
     --progress-bg: rgba(255, 255, 255, 0.2);
     --progress-buffer: rgba(255, 255, 255, 0.35);
-    --font: 'IBM Plex Sans Arabic', sans-serif;
+    --font: 'thmanyah sans', sans-serif;
 }
 
 *,
@@ -65,7 +64,7 @@ body {
     left: 0;
     right: 0;
     height: 140px;
-    background: linear-gradient(180deg, rgb(0 0 0 / 26%) 0%, rgb(0 0 0 / 14%) 55%, transparent 100%);
+    background: linear-gradient(180deg, rgb(0 0 0 / 40%) 0%, rgb(0 0 0 / 14%) 55%, transparent 100%);
     z-index: 10;
     pointer-events: none;
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -120,8 +119,8 @@ body {
 }
 
 .close-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
 }
 
 .title-area {
@@ -131,16 +130,16 @@ body {
 }
 
 .title-link {
-    font-size: 15px;
+    color: var(--text-text-secondary, rgb(255, 255, 255));
+    font-feature-settings: 'ss01' on;
+    font-family: "Thmanyah sans 1.2";
+    font-size: var(--font-headline-lg-text-size, 24px);
+    font-style: normal;
     font-weight: 500;
-    color: var(--white);
-    direction: rtl;
-    letter-spacing: -0.01em;
+    line-height: var(--font-headline-md-line-height, 24px); /* 100% */
     text-decoration: none;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 8px;
-    transition: background 0.15s, color 0.15s;
+    padding: 15px 25px;
+    border-radius: 30px;
 }
 
 .title-link:hover {
@@ -177,8 +176,8 @@ body {
 }
 
 .title-pip-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
 }
 
 /* ===== BOTTOM ===== */
@@ -401,6 +400,7 @@ body {
     overflow: hidden;
     display: flex;
     align-items: center;
+    margin: 0 0 0 -10px;
     transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -598,9 +598,9 @@ body {
     background: rgba(28, 28, 28, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 14px;
+    border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    min-width: 240px;
+    min-width: 300px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(6px);
@@ -638,8 +638,9 @@ body {
     justify-content: flex-start; /* تغيير المحاذاة للبداية (اليمين في RTL) */
     flex-direction: row-reverse; /* عكس ترتيب الأيقونة والنص ليظهر النص يميناً */
     gap: 12px;
-    padding: 12px 14px;
+    padding: 15px 24px;
     direction: rtl; /* التأكد من اتجاه النص العربي */
+    border-radius: 50px;
 }
 
 .popover-item:hover {
@@ -653,6 +654,7 @@ body {
     color: var(--white-80);
     transition: color 0.15s;
     text-align: right;
+    width: fit-content;
 }
 
 .popover-item:hover .popover-item-name {
@@ -827,9 +829,9 @@ body {
 }
 
 .popover-item-name {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     text-align: right;
-    order: 1; /* يضمن بقاء النص في جهة اليمين */
+
 }
 
 .popover-item-check {
