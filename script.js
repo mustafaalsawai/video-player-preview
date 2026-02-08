@@ -203,7 +203,7 @@ qualityPopover.addEventListener('mouseleave', () => { qualityHideTimer = setTime
 
 // Audio popover hover
 // audioAnchor.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); showPopover(audioPopover); });
-audioAnchor.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
+// audioAnchor.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
 // audioPopover.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); });
 // audioPopover.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
 
@@ -220,11 +220,8 @@ function selectAudio(el) {
 
 // Close popovers on outside click
 document.addEventListener('click', (e) => {
-    if (!qualityAnchor.contains(e.target) && !qualityPopover.contains(e.target)) {
+    if (!qualityAnchor.contains(e.target)) {
         closePopover(qualityPopover, qualityHideTimer);
-    }
-    if (!audioAnchor.contains(e.target) && !audioPopover.contains(e.target)) {
-        closePopover(audioPopover, audioHideTimer);
     }
 });
 
@@ -233,13 +230,13 @@ let hideTimer;
 
 function showControls() {
     player.classList.remove('controls-hidden');
-    if (!qualityPopover.classList.contains('show') && !audioPopover.classList.contains('show')) {
+    if (!qualityPopover.classList.contains('show')) {
         player.classList.remove('hide-cursor');
     }
     clearTimeout(hideTimer);
     if (!video.paused) {
         hideTimer = setTimeout(() => {
-            if (qualityPopover.classList.contains('show') || audioPopover.classList.contains('show')) return;
+            if (qualityPopover.classList.contains('show')) return;
             player.classList.add('controls-hidden', 'hide-cursor');
         }, 3000);
     }
