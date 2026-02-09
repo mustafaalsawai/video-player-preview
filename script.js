@@ -182,8 +182,10 @@ function closePopover(popover, timer) {
     clearTimeout(timer);
     popover.classList.remove('show');
     
-    // إذا أغلقت كل القوائم، نعيد شريط التقدم
-    if (!qualityPopover.classList.contains('show')) {
+    // If all popovers are closed, restore progress bar
+    const qualityOpen = document.getElementById('qualityPopover')?.classList.contains('show');
+    const audioOpen = document.getElementById('audioPopover')?.classList.contains('show');
+    if (!qualityOpen && !audioOpen) {
         player.classList.remove('popover-open');
     }
 }
@@ -202,10 +204,12 @@ qualityPopover.addEventListener('mouseenter', () => { clearTimeout(qualityHideTi
 qualityPopover.addEventListener('mouseleave', () => { qualityHideTimer = setTimeout(() => closePopover(qualityPopover, qualityHideTimer), 200); });
 
 // Audio popover hover
-// audioAnchor.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); showPopover(audioPopover); });
-// audioAnchor.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
-// audioPopover.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); });
-// audioPopover.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
+const audioPopover = document.getElementById('audioPopover');
+const audioAnchor = document.getElementById('audioAnchor');
+audioAnchor.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); showPopover(audioPopover); });
+audioAnchor.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
+audioPopover.addEventListener('mouseenter', () => { clearTimeout(audioHideTimer); });
+audioPopover.addEventListener('mouseleave', () => { audioHideTimer = setTimeout(() => closePopover(audioPopover, audioHideTimer), 200); });
 
 // Selection functions
 function selectQuality(el) {
@@ -214,7 +218,7 @@ function selectQuality(el) {
 }
 
 function selectAudio(el) {
-    document.querySelectorAll('#audioPopover .popover-body .popover-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('#audioPopover .popover-item').forEach(i => i.classList.remove('active'));
     el.classList.add('active');
 }
 
@@ -222,6 +226,9 @@ function selectAudio(el) {
 document.addEventListener('click', (e) => {
     if (!qualityAnchor.contains(e.target)) {
         closePopover(qualityPopover, qualityHideTimer);
+    }
+    if (!audioAnchor.contains(e.target)) {
+        closePopover(audioPopover, audioHideTimer);
     }
 });
 
