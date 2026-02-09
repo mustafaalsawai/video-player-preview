@@ -372,6 +372,11 @@ body {
     font-family: var(--font);
     direction: rtl;
 }
+/* تعطيل الهنت النصي بالكامل */
+.btn .tip,
+.title-pip-btn .tip {
+  display: none !important;
+}
 
 .btn:hover .tip,
 .title-pip-btn:hover .tip {
